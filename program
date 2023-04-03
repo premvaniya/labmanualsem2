@@ -1,0 +1,240 @@
+CREATE TABLE Employee ( 
+ id INT PRIMARY KEY, 
+ name VARCHAR(50), 
+ age INT, 
+ salary DECIMAL(10,2) 
+); 
+INSERT INTO Employee values(1, 'John', 25, 50000.00);
+INSERT INTO Employee values(2, 'Sarah', 30, 65000.00); 
+INSERT INTO Employee values (3, 'David', 35, 80000.00);
+INSERT INTO Employee values(4, 'Emily', 27, 55000.00); 
+ALTER TABLE Employee ADD department VARCHAR(50); 
+DROP TABLE Employee; 
+TRUNCATE TABLE Employee; 
+RENAME TABLE Employee TO NewEmployee; 
+
+
+
+CREATE TABLE Employees ( 
+ id INT PRIMARY KEY, 
+ name VARCHAR(50), 
+ age INT, 
+ salary DECIMAL(10,2) 
+); 
+INSERT INTO Employees VALUES 
+ (1, 'John', 25, 50000.00);
+ (2, 'Sarah', 30, 65000.00); 
+ (3, 'David', 35, 80000.00); 
+ (4, 'Emily', 27, 55000.00); 
+ (5, 'James', 32, 75000.00); 
+ (6, 'Linda', 28, 60000.00); 
+ (7, 'Michael', 40, 90000.00); 
+ (8, 'Jennifer', 29, 55000.00); 
+ (9, 'William', 33, 70000.00); 
+ (10, 'Jessica', 26, 45000.00); 
+UPDATE Employees 
+SET salary = 60000.00 
+WHERE name = 'Emily'; 
+DELETE FROM Employees 
+WHERE id = 2; 
+
+
+
+CREATE TABLE Employees ( 
+ id INT PRIMARY KEY, 
+ name VARCHAR(50), 
+ age INT, 
+ salary DECIMAL(10,2) 
+); 
+INSERT INTO Employees VALUES 
+ (1, 'John', 25, 50000.00);
+INSERT INTO Employees VALUES  (2, 'Sarah', 30, 65000.00);
+ INSERT INTO Employees VALUES (3, 'David', 35, 80000.00); 
+ INSERT INTO Employees VALUES (4, 'Emily', 27, 55000.00); 
+ INSERT INTO Employees VALUES (5, 'James', 32, 75000.00); 
+ INSERT INTO Employees VALUES (6, 'Linda', 28, 60000.00); 
+ INSERT INTO Employees VALUES (7, 'Michael', 40, 90000.00); 
+ INSERT INTO Employees VALUES (8, 'Jennifer', 29, 55000.00); 
+ INSERT INTO Employees VALUES (9, 'William', 33, 70000.00);
+ INSERT INTO Employees VALUES (10, 'Jessica', 26, 45000.00); 
+SELECT * 
+FROM Employees; 
+SELECT name, salary 
+FROM Employees; 
+SELECT name, salary 
+FROM Employees 
+ORDER BY salary DESC; 
+SELECT name, salary 
+FROM Employees 
+WHERE salary > 60000.00; 
+SELECT name, age 
+FROM Employees 
+WHERE name LIKE 'J%';
+
+
+
+
+DECLARE 
+ a NUMBER := 25; 
+ b NUMBER := 40; 
+ max_val NUMBER; 
+BEGIN 
+ IF a > b THEN 
+ max_val := a; 
+ ELSE 
+ max_val := b; 
+ END IF; 
+ DBMS_OUTPUT.PUT_LINE('The maximum value is ' || max_val); 
+END;
+
+
+
+
+DECLARE 
+ input_date DATE := TO_DATE('2022-04-02', 'YYYY-MM-DD'); 
+ day_of_week VARCHAR2(20); 
+BEGIN 
+ day_of_week := TO_CHAR(input_date, 'DAY'); 
+ 
+ IF day_of_week = 'SATURDAY' OR day_of_week = 'SUNDAY' THEN 
+ DBMS_OUTPUT.PUT_LINE('The date falls on a weekend.'); 
+ ELSE 
+ DBMS_OUTPUT.PUT_LINE('The date does not fall on a weekend.'); 
+ END IF; 
+END;
+
+
+DECLARE 
+ sales_amt NUMBER := 15000; 
+ target_amt NUMBER := 10000; 
+ incenƟve_amt NUMBER;
+BEGIN 
+ IF sales_amt >= target_amt THEN 
+ incenƟve_amt := sales_amt * 0.1;
+ DBMS_OUTPUT.PUT_LINE('IncenƟve amount: ' || incenƟve_amt);
+ ELSE 
+ incenƟve_amt := 500;
+ DBMS_OUTPUT.PUT_LINE('General incenƟve amount: ' || incenƟve_amt);
+ END IF; 
+END; 
+
+
+DECLARE 
+ grade CHAR(1) := 'B'; 
+ descripƟon VARCHAR2(50);
+BEGIN 
+ SELECT 
+ CASE grade 
+ WHEN 'A' THEN 'Excellent' 
+ WHEN 'B' THEN 'Very Good' 
+ WHEN 'C' THEN 'Good' 
+ WHEN 'D' THEN 'Average' 
+ WHEN 'F' THEN 'Fail' 
+ ELSE 'Invalid grade' 
+ END 
+ INTO descripƟon
+ FROM dual; 
+ DBMS_OUTPUT.PUT_LINE('Grade ' || grade || ' - ' || descripƟon);
+END;
+
+
+
+DECLARE 
+ empno NUMBER; 
+ deptno NUMBER; 
+ salary NUMBER; 
+BEGIN 
+ -- Prompt user to enter employee number 
+ empno := &Enter_employee_number; 
+ -- Retrieve department number and salary for the given employee number 
+ SELECT deptno, sal INTO deptno, salary FROM emp WHERE empno = empno; 
+ -- Check if department number is 20 
+ IF deptno = 20 THEN 
+ -- Update salary 
+ UPDATE emp SET sal = sal * 1.1 WHERE empno = empno; 
+ DBMS_OUTPUT.PUT_LINE('Salary updated for employee number ' || empno); 
+ ELSE 
+ DBMS_OUTPUT.PUT_LINE('Employee does not belong to department 20'); 
+ END IF; 
+END; 
+
+
+
+BEGIN 
+ first_number := numbers_array(1); 
+ DBMS_OUTPUT.PUT_LINE('The first number is ' || first_number); 
+END; 
+Q 10 FIND OUT FACTORIAL OF A NUMBER USING PL/SQL BLOCK. 
+DECLARE 
+ num NUMBER := &Enter_number; 
+ fact NUMBER := 1; 
+BEGIN 
+ FOR i IN 1..num LOOP 
+ fact := fact * i; 
+ END LOOP; 
+ DBMS_OUTPUT.PUT_LINE('Factorial of ' || num || ' is ' || fact); 
+END; 
+
+
+
+DECLARE 
+ i NUMBER := 1; 
+BEGIN 
+ LOOP 
+ IF i > 5 THEN 
+ EXIT; 
+ END IF; 
+ IF i = 3 THEN 
+ i := i + 1; 
+ CONTINUE; 
+ END IF; 
+ DBMS_OUTPUT.PUT_LINE('Value of i is ' || i); 
+ i := i + 1; 
+ END LOOP; 
+END;
+
+
+DECLARE 
+ CURSOR c_cust IS 
+ SELECT customer_name, fixed_deposit_number, fixed_deposit_amount 
+ FROM customer_table 
+ ORDER BY fixed_deposit_amount DESC; 
+ v_customer_name customer_table.customer_name%TYPE; 
+ v_fixed_deposit_number customer_table.fixed_deposit_number%TYPE; 
+ v_fixed_deposit_amount customer_table.fixed_deposit_amount%TYPE; 
+ i NUMBER := 1; 
+BEGIN 
+ OPEN c_cust; 
+ LOOP 
+ FETCH c_cust INTO v_customer_name, v_fixed_deposit_number, v_fixed_deposit_amount; 
+ EXIT WHEN c_cust%NOTFOUND OR i > 5; 
+ DBMS_OUTPUT.PUT_LINE('Customer name: ' || v_customer_name); 
+ DBMS_OUTPUT.PUT_LINE('Fixed deposit number: ' || v_fixed_deposit_number); 
+ DBMS_OUTPUT.PUT_LINE('Fixed deposit amount: ' || v_fixed_deposit_amount); 
+ i := i + 1; 
+ END LOOP; 
+ CLOSE c_cust; 
+END;
+
+CREATE OR REPLACE TRIGGER student_age_trigger 
+BEFORE UPDATE OR INSERT ON students 
+FOR EACH ROW 
+DECLARE 
+ v_age_diff NUMBER; 
+BEGIN 
+ IF UPDATING THEN 
+ v_age_diff := ROUND(MONTHS_BETWEEN(:OLD.date_of_birth, :NEW.date_of_birth) / 12); 
+ DBMS_OUTPUT.PUT_LINE('Age difference before update: ' || v_age_diff); 
+ ELSIF INSERTING THEN 
+ v_age_diff := NULL; 
+ END IF; 
+END; 
+/
+
+
+CREATE SEQUENCE dept_id_seq 
+START WITH 1000 
+INCREMENT BY 1 
+MAXVALUE 9999 
+CYCLE; 
+SELECT dept_id_seq.NEXTVAL FROM dual;
